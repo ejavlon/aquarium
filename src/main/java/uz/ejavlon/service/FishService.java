@@ -49,17 +49,12 @@ public class FishService {
                 && Aquarium.fishes.get(i).getGender() != Aquarium.fishes.get(start).getGender()){
 
                 Fish newFish = new Fish(Gender.genereteGender());
-                newFish.setParents(
-                        List.of(
-                                Aquarium.fishes.get(i),
-                                Aquarium.fishes.get(start)
-                        )
-                );
                 Aquarium.fishes.add(newFish);
 
                 Fish parent1 = Aquarium.fishes.get(i);
                 Fish parent2 = Aquarium.fishes.get(start);
-                stringBuilder.append(String.format("%s - id'lik %s bilan %s - id'lik %s uchrashdi \n va %s - id'lik %s dunyoga keldi.\n\n",
+
+                stringBuilder.append(String.format("%s - id'lik %s bilan %s - id'lik %s uchrashdi \n va %s - id'lik %s tug'ildi.\n\n",
                         parent1.getId(), parent1.getGender().getDescription(),
                         parent2.getId(), parent2.getGender().getDescription(),
                         newFish.getId(),newFish.getGender().getDescription()

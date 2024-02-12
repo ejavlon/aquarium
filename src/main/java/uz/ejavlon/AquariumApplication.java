@@ -21,15 +21,16 @@ public class AquariumApplication {
             @Override
             public void run() {
 
+                System.out.println("\n\n--------------------------------------------------------------------------------------------------------");
                 System.out.println("\nBaliqlar xaqida ma'lumot:");
                 for (Fish fish : Aquarium.fishes) {
                     System.out.println(fish);
                 }
 
                 String info = FishService.info();
-                System.out.println(info);
+                System.out.println("\n"+info);
 
-                System.out.println("\n\nBaliqlar boshqa koordinataga ko'chdi:\n");
+                System.out.println("\nBaliqlar boshqa koordinataga ko'chdi:\n");
                 for (Fish fish : Aquarium.fishes) {
                     new Thread(fish).start();
                 }

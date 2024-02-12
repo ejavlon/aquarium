@@ -15,9 +15,6 @@ public class Fish implements Runnable{
 
     private final Gender gender;
 
-    private List<Fish> parents;
-
-    private List<Fish> childes;
 
     public Fish(Gender gender) {
         Random random = new Random();
@@ -26,12 +23,11 @@ public class Fish implements Runnable{
         this.coordinate = move();
         this.lifeSpan = random.nextInt(30) + 1;
         this.gender = gender;
-        this.childes = new ArrayList<>();
     }
 
     @Override
     public void run() {
-        if (this.lifeSpan == 1) {
+        if (this.lifeSpan == 0) {
             Aquarium.fishes.remove(this);
             System.out.printf("%s - id'lik baliq o'ldi.\n",this.getId());
         }
@@ -75,26 +71,6 @@ public class Fish implements Runnable{
         return gender;
     }
 
-    public List<Fish> getParents() {
-        return parents;
-    }
-
-    public void setParents(List<Fish> parents) {
-        this.parents = parents;
-    }
-
-    public List<Fish> getChildes() {
-        return childes;
-    }
-
-    public void setChildes(List<Fish> childes) {
-        this.childes = childes;
-    }
-
-    public void addChild(Fish newChild){
-        childes.add(newChild);
-    }
-
     @Override
     public String toString() {
         return "Fish{" +
@@ -102,8 +78,6 @@ public class Fish implements Runnable{
                 ", coordinate=" + coordinate +
                 ", lifeSpan=" + lifeSpan +
                 ", gender=" + gender +
-                ", parents=" + parents +
-                ", childes=" + childes +
                 '}';
     }
 }
