@@ -17,10 +17,7 @@ public class AquariumApplication {
 
         FishService.build(n, m);
 
-
-        Timer timer = new Timer();
-
-        timer.scheduleAtFixedRate(new TimerTask() {
+        new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
 

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class Fish implements Runnable{
 
-    private Integer id;
+    private final Integer id;
 
     private Coordinate coordinate;
 

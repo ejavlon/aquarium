@@ -5,7 +5,6 @@ import uz.ejavlon.models.Coordinate;
 import uz.ejavlon.models.Fish;
 import uz.ejavlon.models.Gender;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -66,12 +65,6 @@ public class FishService {
                         newFish.getId(),newFish.getGender().getDescription()
                         ));
             }
-        }
-    }
-
-    public static void removeDeadFish() {
-        for (Fish fish : Aquarium.fishes) {
-            if (fish.getLifeSpan()==0) Aquarium.fishes.remove(fish);
         }
     }
 }
