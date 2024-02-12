@@ -1,4 +1,4 @@
-package uz.ejavlon.models.service;
+package uz.ejavlon.service;
 
 import uz.ejavlon.models.Aquarium;
 import uz.ejavlon.models.Coordinate;

@@ -3,7 +3,7 @@ package uz.ejavlon;
 
 import uz.ejavlon.models.Aquarium;
 import uz.ejavlon.models.Fish;
-import uz.ejavlon.models.service.FishService;
+import uz.ejavlon.service.FishService;
 
 import java.util.*;
 
