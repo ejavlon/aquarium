@@ -1,9 +1,6 @@
 package uz.ejavlon.models;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 public class Fish implements Runnable{
 

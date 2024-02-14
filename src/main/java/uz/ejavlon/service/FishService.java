@@ -31,6 +31,7 @@ public class FishService {
     }
 
     public static String info(){
+        int oldSize = Aquarium.fishes.size();
         StringBuilder stringBuilder = new StringBuilder();
         List<Coordinate> coordinates = Aquarium.fishes.stream().map(Fish::getCoordinate).toList();
 
@@ -38,12 +39,12 @@ public class FishService {
             int count = Collections.frequency(coordinates, coordinates.get(i));
             if (count > 1) checkCoordinate(coordinates,i,stringBuilder);
         }
-
-
+        System.out.printf("\nBaliqlar soni %s taga ko'paydi.",Aquarium.fishes.size()-oldSize);
         return stringBuilder.toString();
     }
 
     private static void checkCoordinate(List<Coordinate> coordinates, int start, StringBuilder stringBuilder) {
+
         for (int i = start+1; i < coordinates.size(); i++) {
             if (coordinates.get(i).equals(coordinates.get(start))
                 && Aquarium.fishes.get(i).getGender() != Aquarium.fishes.get(start).getGender()){

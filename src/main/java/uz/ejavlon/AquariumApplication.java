@@ -35,7 +35,7 @@ public class AquariumApplication {
                     new Thread(fish).start();
                 }
             }
-        },0,15000);
+        },0,10000);
 
     }
 }
