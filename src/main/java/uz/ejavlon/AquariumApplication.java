@@ -12,7 +12,8 @@ public class AquariumApplication {
         int n = random.nextInt(20) + 1;
         int m = random.nextInt(20) + 1;
 
-        Aquarium aquarium = new Aquarium(n,m);
+        Aquarium aquarium = new Aquarium(n, m);
         new Thread(aquarium).start();
+
     }
 }
