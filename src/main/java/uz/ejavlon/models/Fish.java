@@ -41,7 +41,6 @@ public class Fish implements Runnable, Comparable<Fish>{
                 this.coordinate = move();
                 System.out.printf("%s - id'lik %s %s'ga harakatlandi.\tBarcha ko'rsatgichlar:%s\n",id,gender.getDescription(),coordinate,this);
             }
-
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {

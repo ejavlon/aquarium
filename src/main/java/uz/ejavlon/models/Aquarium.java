@@ -11,16 +11,16 @@ public class Aquarium implements Runnable {
     private final List<Fish> fishes;
 
     public Aquarium(int n, int m) {
-        this.fishes = new ArrayList<>();
+        this.fishes = Collections.synchronizedList( new ArrayList<>());
         generateFish(n,m);
     }
 
     @Override
     public void run() {
-        boolean anyMatch = fishes.stream().anyMatch(fish -> fish.getLifeSpan() > 0);
+        boolean anyMatch;
         int loopCount = 1;
 
-        while (anyMatch){
+        do{
             System.out.printf("\nCamera info(%s):\n%s\n ",loopCount,cameraInfo());
             try {
                 Thread.sleep(5000);
@@ -29,36 +29,41 @@ public class Aquarium implements Runnable {
             }
             loopCount++;
             anyMatch = fishes.stream().anyMatch(fish -> fish.getLifeSpan() > 0);
-        }
+        }while (anyMatch);
+
         System.out.println("Barcha baliqlar o'ldi!");
     }
     private void generateFish(int n, int m){
-        Fish fish;
-        for (int i = 0; i < n; i++) {
-            fish = new Fish(Gender.MALE,this);
-            fishes.add(fish);
-            new Thread(fish).start();
-        }
+        new Thread(() -> {
+            Fish fish;
+            for (int i = 0; i < n; i++) {
+                fish = new Fish(Gender.MALE,this);
+                fishes.add(fish);
+                new Thread(fish).start();
+            }
 
-        for (int i = 0; i < m; i++) {
-            fish = new Fish(Gender.FEMALE,this);
-            fishes.add(fish);
-            new Thread(fish).start();
-        }
+            for (int i = 0; i < m; i++) {
+                fish = new Fish(Gender.FEMALE,this);
+                fishes.add(fish);
+                new Thread(fish).start();
+            }
+        }).start();
     }
 
     private String cameraInfo(){
         StringBuilder stringBuilder = new StringBuilder();
-        long maleFishCount = fishes.stream().filter(fish -> fish.getLifeSpan() != 0 && fish.getGender() == Gender.MALE).count();
-        List<Fish> aLiveFishes = new ArrayList<>(fishes.stream().parallel().filter(fish -> fish.getLifeSpan() != 0).toList());
+        synchronized (fishes){
+            long maleFishCount = fishes.stream().filter(fish -> fish.getLifeSpan() != 0 && fish.getGender() == Gender.MALE).count();
+            List<Fish> aLiveFishes = new ArrayList<>(fishes.stream().parallel().filter(fish -> fish.getLifeSpan() != 0).toList());
 
-        if (maleFishCount == aLiveFishes.size() || maleFishCount == 0)
-            return maleFishCount == 0 ? stringBuilder.append("Barcha tirik baliqlar urg'ochi").toString() : stringBuilder.append("Barcha tirik baliqlar erkak").toString();
+            if (maleFishCount == aLiveFishes.size() || maleFishCount == 0)
+                return maleFishCount == 0 ? stringBuilder.append("Barcha tirik baliqlar urg'ochi").toString() : stringBuilder.append("Barcha tirik baliqlar erkak").toString();
 
-        Collections.sort(aLiveFishes);
-        checkCoordinate(aLiveFishes,stringBuilder);
+            Collections.sort(aLiveFishes);
+            checkCoordinate(aLiveFishes,stringBuilder);
 
-        return stringBuilder.isEmpty() ? stringBuilder.append("Baliqlar ko'paymadi.\n").toString() : stringBuilder.toString();
+            return stringBuilder.isEmpty() ? stringBuilder.append("Baliqlar ko'paymadi.\n").toString() : stringBuilder.toString();
+        }
     }
 
     private void  checkCoordinate(List<Fish>aLiveFishes,StringBuilder stringBuilder){

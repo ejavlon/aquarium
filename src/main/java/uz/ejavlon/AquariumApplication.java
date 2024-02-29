@@ -3,7 +3,6 @@ package uz.ejavlon;
 import uz.ejavlon.models.Aquarium;
 import java.util.Random;
 
-
 public class AquariumApplication {
     public static void main(String[] args) {
 
