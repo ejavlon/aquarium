@@ -38,7 +38,7 @@ public class Fish implements Runnable, Comparable<Fish>{
             }
             else{
                 this.lifeSpan--;
-                this.coordinate = move();
+                move();
                 System.out.printf("%s - id'lik %s %s'ga harakatlandi.\tBarcha ko'rsatgichlar:%s\n",id,gender.getDescription(),coordinate,this);
             }
             try {
@@ -54,7 +54,10 @@ public class Fish implements Runnable, Comparable<Fish>{
         int xPosition = random.nextInt(Aquarium.maxPosition.getX() + 1);
         int yPosition = random.nextInt(Aquarium.maxPosition.getY() + 1);
 
-        return new Coordinate(xPosition,yPosition);
+        Coordinate newCoordinate = new Coordinate(xPosition, yPosition);
+        setCoordinate(newCoordinate);
+
+        return newCoordinate;
     }
 
     public Coordinate getCoordinate() {
@@ -94,7 +97,7 @@ public class Fish implements Runnable, Comparable<Fish>{
     }
 
     private String toString(Set<Fish> fishes){
-        if (fishes.size() == 0) return "";
+        if (fishes.isEmpty()) return "";
 
         StringBuilder stringBuilder = new StringBuilder();
         fishes.forEach(fish -> {
